@@ -15,6 +15,10 @@ export function useWallet() {
       return;
     }
 
+    // Remove any existing listeners before re-registering to avoid duplicates
+    window.ethereum.removeAllListeners?.('accountsChanged');
+    window.ethereum.removeAllListeners?.('chainChanged');
+
     setConnecting(true);
     try {
       const provider = new BrowserProvider(window.ethereum);
