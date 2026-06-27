@@ -1,36 +1,10 @@
-import { useState, useEffect } from 'react'
 import { TrendingUp, TrendingDown, DollarSign, Target } from 'lucide-react'
-
-interface CryptoData {
-  id: string
-  name: string
-  symbol: string
-  price: number
-  change24h: number
-  marketCap: number
-}
+import useCryptoData from '../hooks/useCryptoData'
 
 export default function Dashboard() {
-  const [cryptos, setCryptos] = useState<CryptoData[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  const { data: cryptos, loading, error } = useCryptoData()
 
-  // Sample data - replace with real API calls
-  useEffect(() => {
-    const sampleData: CryptoData[] = [
-      { id: '1', name: 'Bitcoin', symbol: 'BTC', price: 42500, change24h: 2.5, marketCap: 850000000000 },
-      { id: '2', name: 'Ethereum', symbol: 'ETH', price: 2250, change24h: -1.2, marketCap: 270000000000 },
-      { id: '3', name: 'Cardano', symbol: 'ADA', price: 0.75, change24h: 3.8, marketCap: 27000000000 },
-      { id: '4', name: 'Solana', symbol: 'SOL', price: 145, change24h: 5.2, marketCap: 62000000000 },
-    ]
-
-    setTimeout(() => {
-      setCryptos(sampleData)
-      setLoading(false)
-    }, 500)
-  }, [])
-
-  const portfolioValue = 15250.00
+  const portfolioValue = 15250.0
   const portfolioChange = 1250.50
   const portfolioChangePercent = 8.9
 
